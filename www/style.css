@@ -1,84 +1,93 @@
-body{
-    background-color: black;
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
-.square{
-    position: relative;
-    width: 300px;
-    height: 300px;
+body {
+    background-color: #000000; /* Fully black background */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-.square span:nth-child(1){
+.square {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #00aaff, #ff4500, #00ff99);
+    background-size: 400% 400%;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(0, 170, 255, 0.7);
+    animation: shimmer 5s infinite alternate, pulse 3s infinite alternate;
+}
+
+/* Gradient shimmer movement */
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Smooth pulsating effect */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(0, 170, 255, 0.6), 0 0 50px rgba(255, 69, 0, 0.5);
+    }
+    100% {
+        transform: scale(1.15);
+        box-shadow: 0 0 50px rgba(0, 255, 153, 0.7), 0 0 70px rgba(0, 170, 255, 0.7);
+    }
+}
+
+.square span {
     position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
-    background-image: radial-gradient(#6b72ff00 50%, #000dff3b 40%);
-    box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+    border-radius: 50%;
+    mix-blend-mode: screen;
     transition: 0.5s;
+}
+
+/* First glowing swirl */
+.square span:nth-child(1) {
+    background: radial-gradient(circle, rgba(0, 170, 255, 0.3) 30%, transparent 70%);
+    box-shadow: 0 0 40px rgba(0, 170, 255, 0.6), inset 0 0 40px rgba(0, 170, 255, 0.5);
     animation: animate1 6s linear infinite;
 }
 
-.square span:nth-child(2){
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgb(1, 13, 7) 50%, #000dff3b 40%);
-    box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-    transition: 0.5s;
+/* Second glowing swirl */
+.square span:nth-child(2) {
+    background: radial-gradient(circle, rgba(255, 69, 0, 0.3) 30%, transparent 70%);
+    box-shadow: 0 0 40px rgba(255, 69, 0, 0.6), inset 0 0 40px rgba(255, 69, 0, 0.5);
     animation: animate2 4s linear infinite;
 }
 
-.square span:nth-child(3){
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgb(1, 13, 7) 50%, #000dff3b 40%);
-    box-shadow: 0 0 50px rgb(25, 0, 255), inset 0 0 50px rgb(25, 0, 255);
-    border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
-    transition: 0.5s;
+/* Third glowing swirl */
+.square span:nth-child(3) {
+    background: radial-gradient(circle, rgba(0, 255, 153, 0.3) 30%, transparent 70%);
+    box-shadow: 0 0 40px rgba(0, 255, 153, 0.6), inset 0 0 40px rgba(0, 255, 153, 0.5);
     animation: animate3 8s linear infinite;
 }
 
+/* Rotations with different speeds */
 @keyframes animate1 {
-    0%{
-        transform: rotate(0deg);    
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-
+    0% { transform: rotate(0deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1.2); }
 }
 
 @keyframes animate2 {
-    0%{
-        transform: rotate(0deg);    
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-    
+    0% { transform: rotate(0deg) scale(1.15); }
+    100% { transform: rotate(-360deg) scale(1.05); }
 }
 
 @keyframes animate3 {
-    0%{
-        transform: rotate(0deg);    
-    }
-    100%{
-        transform: rotate(360deg);
-    }
-    
+    0% { transform: rotate(0deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1.25); }
 }
-

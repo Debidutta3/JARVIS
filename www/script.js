@@ -1,5 +1,5 @@
 window.addEventListener("load", windowLoadHandler, false);
-var sphereRad = 290;
+var sphereRad = 320;
 var radius_sp = 1;
 //for debug messages
 var Debugger = function () {};
@@ -71,9 +71,9 @@ function canvasApp() {
     numToAddEachFrame = 8;
 
     //particle color
-    r = 0;
-    g = 72;
-    b = 255;
+    r = 255;
+    g = 170;
+    b = 29;
 
     rgbString = "rgba(" + r + "," + g + "," + b + ","; //partial string for color which will be completed by appending alpha value.
     particleAlpha = 1; //maximum alpha
