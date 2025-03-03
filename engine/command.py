@@ -1,5 +1,6 @@
 import pyttsx3
 import speech_recognition as sr
+import eel
 
 #function to enable speak feature
 def speak(text):
@@ -11,12 +12,13 @@ def speak(text):
     engine.say(text) #speak the given text
     engine.runAndWait() #wait when there is space or punctuation marks
     
-
+@eel.expose #Now we can access the takeCommand function in html
 def takeCommand():
     r = sr.Recognizer() #Recognizer is a class to recognize speech
     
     with sr.Microphone() as source: #using microphone as source audio
         print("Listening...")
+        eel.DisplayMessage("Listening...") #import the function from controller.js and Display listening by which we can display the
         r.pause_threshold = 1
         r.adjust_for_ambient_noise(source)
         
@@ -24,12 +26,13 @@ def takeCommand():
     
     try:
         print("Recognizing...")
+        eel.DisplayMessage("Recognizing...") #After speaking, recognizing should come.
         query = r.recognize_google(audio, language='en-in') #recognize the audio and the language is english india
         print(f"User said: {query}\n")
+        eel.DisplayMessage(query) #display the spoken message
+        speak(query)
+        eel.showHood()
     except Exception as e:
         return ""
     
     return query.lower() #return the output in lowercase
-
-text = takeCommand() #call the function to take the input
-speak(text) #output of the taken input

@@ -2,6 +2,7 @@ import os
 import eel
 
 from engine.features import *
+from engine.command import *
 
 #in which folder, index.html is present
 eel.init("www")
