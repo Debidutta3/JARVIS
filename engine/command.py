@@ -1,6 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
 import eel
+import time
 
 #function to enable speak feature
 def speak(text):
@@ -8,11 +9,10 @@ def speak(text):
     voices = engine.getProperty('voices')
     engine.setProperty('voice', voices[0].id)
     engine.setProperty('rate', 174)
-    print(voices)
+    eel.DisplayMessage(text) #display the spoken message
     engine.say(text) #speak the given text
     engine.runAndWait() #wait when there is space or punctuation marks
     
-@eel.expose #Now we can access the takeCommand function in html
 def takeCommand():
     r = sr.Recognizer() #Recognizer is a class to recognize speech
     
@@ -29,10 +29,26 @@ def takeCommand():
         eel.DisplayMessage("Recognizing...") #After speaking, recognizing should come.
         query = r.recognize_google(audio, language='en-in') #recognize the audio and the language is english india
         print(f"User said: {query}\n")
-        eel.DisplayMessage(query) #display the spoken message
-        speak(query)
-        eel.showHood()
+        eel.DisplayMessage(query) #display the spoken message after listening.
     except Exception as e:
         return ""
     
     return query.lower() #return the output in lowercase
+
+@eel.expose #Now we can access the takeCommand function in html
+def allCommands():
+    query = takeCommand()
+    print (query)
+    
+    if "open" in query:
+        from engine.features import openCommand
+        openCommand(query)
+        
+    elif "on youtube":
+        from engine.features import playYoutube
+        playYoutube(query)
+        
+    else:
+        print("Not running..")
+        
+    eel.showHood()
